@@ -122,8 +122,14 @@ vnet {
 }
 
 dns_zone {
-    name        = "thedemo.biz"
-    zone_type   = "Public"
+    external {
+        name        = "thedemo.biz"
+        zone_type   = "Public"
+    }
+    internal {
+        name        = "aks.internal"
+        zone_type   = "Private"
+    }
 }
 
 analytics_workspace_name = "aks"

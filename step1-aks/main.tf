@@ -21,7 +21,7 @@ module "azure_dns" {
     source                  = "modules/azure_dns"
     
     resource_group_name     = "${module.resource_group.names["networking"]}"
-    dns_zone                = "${var.dns_zone}"
+    dns_zone                = "${var.dns_zone["external"]}"
 }
 
 module "aks_primary" {
