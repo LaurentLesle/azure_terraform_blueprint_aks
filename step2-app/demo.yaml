@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mypod
+spec:
+  containers:
+  - image: nginx:1.15.5
+    name: mypod
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        cpu: 250m
+        memory: 256Mi
+    volumeMounts:
+      - name: azure
+        mountPath: /mnt/azure
+  volumes:
+  - name: azure
+    azureFile:
+      secretName: azure-secret
+      shareName: aks
+      readOnly: false
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: azurefile
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  azureFile:
+    secretName: azure-secret
+    shareName: azurefile
+    readOnly: false
+  mountOptions:
+  - dir_mode=0755
+  - file_mode=0755
+  - uid=1000
+  - gid=1000
