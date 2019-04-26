@@ -27,3 +27,4 @@ variable "default_location" {
 variable "resource_group_name" {
   
 }
+

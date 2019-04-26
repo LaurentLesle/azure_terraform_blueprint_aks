@@ -58,3 +58,4 @@ variable "default_dns_name" {
 variable "location" {
   
 }
+

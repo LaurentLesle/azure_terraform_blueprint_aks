@@ -37,7 +37,7 @@ module "vnet_and_subnets" {
     prefix                  = "${var.prefix}"
     vnet                    = "${var.vnet}"
     subnets                 = "${var.subnets}"
-  
+    dns_zone                = "${var.dns_zone}"
 }
 
 
@@ -74,6 +74,7 @@ module "aks_cluster" {
     log_analytics_workspace_id  = "${var.log_analytics_workspace_id}"
     default_dns_name            = "${var.dns_zone["name"]}"
 }
+
 
 module "bastion" {
     source              = "../bastion"
