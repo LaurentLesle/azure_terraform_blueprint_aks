@@ -11,3 +11,6 @@ output "access_key" {
     value       = "${azurerm_storage_account.stg.primary_access_key}"
 }
 
+output "prefix" {
+  value = "${random_string.prefix.result}"
+}
