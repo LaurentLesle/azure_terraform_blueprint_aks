@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # To run the deployment:
-# ./deploy.sh ../step0-tfstate/terraform.tfstate [plan|apply]
+# Initialise the remote state first with ./deploy.sh
+# ./deploy.sh step1-aks [plan|apply|destroy]
 
 # capture the current path
 current_path=$(pwd)
