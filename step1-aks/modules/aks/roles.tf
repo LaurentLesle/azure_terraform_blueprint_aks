@@ -17,7 +17,7 @@ resource "azurerm_role_assignment" "ra3" {
 }
 
 resource "azurerm_role_assignment" "ra4" {
-  scope                = "${data.azurerm_resource_group.rg.id}"
+  scope                = "${var.resource_group_id}"
   role_definition_name = "Reader"
   principal_id         = "${var.user_msi_map["principal_id"]}"
 }

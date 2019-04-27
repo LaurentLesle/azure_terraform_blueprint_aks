@@ -2,9 +2,6 @@
 # reference: https://github.com/Azure/application-gateway-kubernetes-ingress
 
 
-
-
-
 # Create service principal for the AKS cluster
 module "aks_service_principal" {
     source                  = "../service_principal"
@@ -20,6 +17,7 @@ module "user_msi" {
   
     prefix                  = "${var.prefix}"
     resource_group_name     = "${var.resource_group_names["identity"]}"
+    location                = "${var.location}"
     name                    = "${var.aks_service_principal["user_msi"]}"
 }
 
@@ -62,6 +60,7 @@ module "aks_cluster" {
     prefix                      = "${var.prefix}"
     location                    = "${var.location}"
     resource_group_name         = "${var.resource_group_names["aks"]}"
+    resource_group_id           = "${var.resource_group_ids["aks"]}"
     vnet_resource_group_name    = "${var.resource_group_names["networking"]}"
     public_ssh_key_openssh      = "${module.aks_ssh_keys.public_key_openssh}"
     service_principal_map       = "${module.aks_service_principal.service_principal_map}"
@@ -80,7 +79,7 @@ module "bastion" {
     source              = "../bastion"
 
     prefix              = "${var.prefix}"
-    default_location    = "${var.location}"
+    location            = "${var.location}"
     computer_name       = "bastion-${var.suffix}"
     vm_size             = "Standard_F2s_v2"
     subnets_map         = "${module.vnet_and_subnets.subnet_map}"

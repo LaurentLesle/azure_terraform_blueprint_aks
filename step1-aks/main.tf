@@ -14,6 +14,7 @@ module "monitoring_workspace" {
     prefix                  = "${var.prefix}"
     name                    = "${var.analytics_workspace_name}"
     resource_group_name     = "${module.resource_group.names["aks"]}"
+    location                = "${var.location_map["primary"]}"
 }
 
 # Register the Azure dns service to an existing domain name
@@ -30,6 +31,7 @@ module "aks_primary" {
     prefix                      = "${var.prefix}"
     suffix                      = "sg"
     resource_group_names        = "${module.resource_group.names}"
+    resource_group_ids          = "${module.resource_group.ids}"
     log_analytics_workspace_id  = "${module.monitoring_workspace.id}"
     aks_map                     = "${var.aks_map["primary"]}"
     dns_zone                    = "${var.dns_zone["internal"]}"           
@@ -46,6 +48,7 @@ module "aks_secondary" {
     prefix                      = "${var.prefix}"
     suffix                      = "hk"
     resource_group_names        = "${module.resource_group.names}"
+    resource_group_ids          = "${module.resource_group.ids}"
     log_analytics_workspace_id  = "${module.monitoring_workspace.id}"
     aks_map                     = "${var.aks_map["secondary"]}"
     dns_zone                    = "${var.dns_zone["internal"]}"           

@@ -18,7 +18,7 @@ resource "azurerm_kubernetes_cluster" "k8s" {
     ]
 
     name                    = "${var.prefix}-${var.aks_map["aks_name"]}"
-    resource_group_name     = "${data.azurerm_resource_group.rg.name}"
+    resource_group_name     = "${var.resource_group_name}"
     location                = "${var.location}"
     dns_prefix              = "${local.dns_prefix}"
     kubernetes_version      = "${var.aks_map["aks_version"]}"

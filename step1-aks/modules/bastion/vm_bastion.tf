@@ -23,16 +23,16 @@ locals {
 
 resource "azurerm_public_ip" "bastion_pip" {
   name                         = "${var.computer_name}-pip"
-  location                     = "${var.default_location}"
-  resource_group_name          = "${data.azurerm_resource_group.rg.name}"
+  location                     = "${var.location}"
+  resource_group_name          = "${var.resource_group_name}"
   allocation_method            = "Dynamic"
   domain_name_label            = "${local.dns_prefix}"
 }
 
 resource "azurerm_network_interface" "bastion" {
   name                         = "${var.computer_name}-nic"
-  location                     = "${var.default_location}"
-  resource_group_name          = "${data.azurerm_resource_group.rg.name}"
+  location                     = "${var.location}"
+  resource_group_name          = "${var.resource_group_name}"
 
   ip_configuration {
     name      = "${var.computer_name}-ipconfig"
@@ -45,8 +45,8 @@ resource "azurerm_network_interface" "bastion" {
 
 resource "azurerm_virtual_machine" "bastion" {
   name                  = "${var.computer_name}"
-  location              = "${var.default_location}"
-  resource_group_name   = "${data.azurerm_resource_group.rg.name}"
+  location              = "${var.location}"
+  resource_group_name   = "${var.resource_group_name}"
   vm_size               = "${var.vm_size}"
   network_interface_ids = ["${azurerm_network_interface.bastion.id}"]
 
@@ -89,7 +89,7 @@ resource "azurerm_virtual_machine" "bastion" {
 
 
   provisioner "local-exec" {
-    command = "az vm restart --name ${azurerm_virtual_machine.bastion.name} --resource-group ${data.azurerm_resource_group.rg.name}"
+    command = "az vm restart --name ${azurerm_virtual_machine.bastion.name} --resource-group ${var.resource_group_name}"
   }
 
 }

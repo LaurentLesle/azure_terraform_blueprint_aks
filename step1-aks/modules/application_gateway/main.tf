@@ -1,10 +1,6 @@
-data "azurerm_resource_group" "rg" {
-    name = "${var.resource_group_name}"
-}
-
 resource "azurerm_public_ip" "pip" {
     name                    = "${var.waf_configuration_map["gateway_name"]}-pip"
-    resource_group_name     = "${data.azurerm_resource_group.rg.name}"
+    resource_group_name     = "${var.resource_group_name}"
     location                = "${var.location}"
     allocation_method       = "${var.waf_configuration_map["pip_allocation"]}"
     sku                     = "${var.waf_configuration_map["pip_sku"]}"
@@ -16,7 +12,7 @@ resource "azurerm_application_gateway" "gw" {
     } 
 
     name                    = "${var.waf_configuration_map["gateway_name"]}"
-    resource_group_name     = "${data.azurerm_resource_group.rg.name}"
+    resource_group_name     = "${var.resource_group_name}"
     location                = "${var.location}"
 
     sku {
