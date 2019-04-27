@@ -19,6 +19,11 @@ variable "resource_group_names" {
     type = "map"
 }
 
+variable "resource_group_ids" {
+    type = "map"
+}
+
+
 variable "waf_configuration_map" {
     description = "Map of the waf configuration"
     type        = "map"

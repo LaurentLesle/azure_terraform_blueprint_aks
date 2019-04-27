@@ -8,6 +8,10 @@ variable "resource_group_name" {
     description = "Resource group name for AKS"
 }
 
+variable "resource_group_id" {
+
+}
+
 variable "vnet_resource_group_name" {
   
 }

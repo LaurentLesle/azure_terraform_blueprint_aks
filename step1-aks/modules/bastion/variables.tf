@@ -20,8 +20,8 @@ variable "subnet_name" {
 }
 
 
-variable "default_location" {
-    description = "Default location to create resource groups and primary resources."
+variable "location" {
+    description = "Location to create resource groups and primary resources."
 }
 
 variable "resource_group_name" {
