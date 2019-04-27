@@ -8,7 +8,7 @@ output "container" {
 
 output "access_key" {
     sensitive   = true
-    value       = "${azurerm_storage_account.stg.primary_access_key}"
+    value       = "${azurerm_storage_account.stg.region1_access_key}"
 }
 
 output "prefix" {

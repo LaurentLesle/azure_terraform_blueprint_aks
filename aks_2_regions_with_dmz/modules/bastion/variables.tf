@@ -21,7 +21,7 @@ variable "subnet_name" {
 
 
 variable "location" {
-    description = "Location to create resource groups and primary resources."
+    description = "Location to create resource groups and region1 resources."
 }
 
 variable "resource_group_name" {
