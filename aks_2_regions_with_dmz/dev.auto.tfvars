@@ -1,11 +1,11 @@
 
 aks_service_principal {
-    primary {
+    region1 {
         user_msi    = "msi-clusterdev01pri"      # Max 24 char including prefix (prefix 4 + 1)
         name        = "aks-clusterdev01pri"
         end_date    = "2020-01-01T01:02:03Z"    # To be refactored to Date + Duration
     }
-    secondary {
+    region2 {
         user_msi    = "msi-clusterdev01sec"      # Max 24 char including prefix (prefix 4 + 1)
         name        = "aks-clusterdev01sec"
         end_date    = "2020-01-01T01:02:03Z"    # To be refactored to Date + Duration
@@ -13,8 +13,8 @@ aks_service_principal {
 }
 
 location_map {
-    "primary"     = "southeastasia"
-    "secondary"   = "eastasia"
+    "region1"     = "southeastasia"
+    "region2"   = "eastasia"
 }
 
 # Key is lexically sorted - adding after a deployment can cause the deployed resources to be deleted and recreated
@@ -27,7 +27,7 @@ resource_groups {
 }
 
 waf_configuration_map {
-    primary {
+    region1 {
         gateway_name                    = "app-gw01-sg"
         sku_name                        = "WAF_V2"
         sku_tier                        = "WAF_V2"
@@ -45,7 +45,7 @@ waf_configuration_map {
         cookie_based_affinity           = "Enabled"
         request_routing_rule_rule_type  = "Basic"   
     }
-    secondary {
+    region2 {
         gateway_name                    = "app-gw01-hk"
         sku_name                        = "WAF_Medium"
         sku_tier                        = "WAF"
@@ -66,7 +66,7 @@ waf_configuration_map {
 }
 
 aks_map {
-    primary {
+    region1 {
         aks_name                    = "aks-cluster1-sg"
         aks_version                 = "1.12.7"
         vm_user_name                = "aks-king"
@@ -77,7 +77,7 @@ aks_map {
         aks_docker_bridge_cidr      = "172.17.0.1/16"
         aks_service_cidr            = "10.30.0.128/25"
     }
-    secondary {
+    region2 {
         aks_name                    = "aks-cluster1-hk"
         aks_version                 = "1.12.7"
         vm_user_name                = "aks-king"
@@ -91,12 +91,12 @@ aks_map {
 }
 
 subnets {
-    primary {
+    region1 {
         "0_kubernetes"              = "aks-cluster1"
         "1_applicationGateway"      = "appgw-aks-cluster1"
         "2_bastion"                 = "bastion1"
     }
-    secondary {
+    region2 {
         "0_kubernetes"              = "aks-cluster1"
         "1_applicationGateway"      = "appgw-aks-cluster1"
         "2_bastion"                 = "bastion1"
@@ -105,14 +105,14 @@ subnets {
 }
 
 vnet {
-    primary {
+    region1 {
         name                    = "vnet-aks"
         address_space           = "10.30.0.0/16"
         aks-cluster1            = "10.30.0.0/25"
         appgw-aks-cluster1      = "10.30.254.0/24"
         bastion1                = "10.30.253.0/24"
     }
-    secondary {
+    region2 {
         name                    = "vnet-aks-hk"
         address_space           = "10.31.0.0/16"
         aks-cluster1            = "10.31.0.0/25"

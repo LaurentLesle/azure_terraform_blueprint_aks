@@ -7,8 +7,8 @@ variable "location_map" {
     description = "Default location to create the resources"
     type = "map"
     default = {
-        primary     = "southeastasia"
-        secondary   = "eastasia"
+        region1     = "southeastasia"
+        region2   = "eastasia"
     }
 }
 
