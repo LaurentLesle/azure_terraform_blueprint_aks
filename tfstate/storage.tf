@@ -1,5 +1,5 @@
 resource "azurerm_resource_group" "rg" {
-  name     = "AKS-TFSTATE-DEV"
+  name     = "${random_string.prefix.result}-TERRAFORM-STATE"
   location = "southeastasia"
 }
 

@@ -2,7 +2,7 @@
 module "resource_group" {
     source                  = "modules/resource_group"
   
-    prefix                  = "${random_string.prefix.result}"
+    prefix                  = "${var.prefix}"
     resource_groups         = "${var.resource_groups}"
     location                = "${var.location_map["primary"]}"
 }
@@ -11,7 +11,7 @@ module "resource_group" {
 module "monitoring_workspace" {
     source                  = "modules/log_analytics"
     
-    prefix                  = "${random_string.prefix.result}"
+    prefix                  = "${var.prefix}"
     name                    = "${var.analytics_workspace_name}"
     resource_group_name     = "${module.resource_group.names["aks"]}"
 }
@@ -27,7 +27,7 @@ module "azure_dns" {
 module "aks_primary" {
     source                      = "modules/blueprint_aks"
 
-    prefix                      = "${random_string.prefix.result}"
+    prefix                      = "${var.prefix}"
     suffix                      = "sg"
     resource_group_names        = "${module.resource_group.names}"
     log_analytics_workspace_id  = "${module.monitoring_workspace.id}"
@@ -43,7 +43,7 @@ module "aks_primary" {
 module "aks_secondary" {
     source                      = "modules/blueprint_aks"
 
-    prefix                      = "${random_string.prefix.result}"
+    prefix                      = "${var.prefix}"
     suffix                      = "hk"
     resource_group_names        = "${module.resource_group.names}"
     log_analytics_workspace_id  = "${module.monitoring_workspace.id}"
