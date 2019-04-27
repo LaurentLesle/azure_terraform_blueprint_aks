@@ -11,6 +11,7 @@ tf_command=$2
 
 
 function initialize_state {
+        echo 'Initializing remote terraform state'
         cd tfstate
         terraform init
         terraform apply -auto-approve

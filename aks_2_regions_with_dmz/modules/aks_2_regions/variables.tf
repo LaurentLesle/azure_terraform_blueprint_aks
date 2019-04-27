@@ -48,4 +48,3 @@ variable "prefix" {
 variable "suffix" {
   
 }
-

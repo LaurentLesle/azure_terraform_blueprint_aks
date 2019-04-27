@@ -23,7 +23,7 @@ module "user_msi" {
 
 # Generate the ssh keys
 module "aks_ssh_keys" {
-    source                  = "../ssh_key"
+    source                  = "git://github.com/LaurentLesle/azure_terraform_blueprint_modules_ssh_keys.git?ref=v1.0.1"
 }
 
 # Create the network environment

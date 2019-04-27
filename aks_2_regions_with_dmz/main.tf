@@ -26,7 +26,7 @@ module "azure_dns" {
 }
 
 module "aks_region1" {
-    source                      = "modules/blueprint_aks"
+    source                      = "modules/aks_2_regions"
 
     prefix                      = "${var.prefix}"
     suffix                      = "sg"
@@ -43,7 +43,7 @@ module "aks_region1" {
 }
 
 module "aks_region2" {
-    source                      = "modules/blueprint_aks"
+    source                      = "modules/aks_2_regions"
 
     prefix                      = "${var.prefix}"
     suffix                      = "hk"
