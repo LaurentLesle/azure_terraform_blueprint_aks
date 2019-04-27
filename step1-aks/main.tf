@@ -18,10 +18,10 @@ module "monitoring_workspace" {
 
 # Register the Azure dns service to an existing domain name
 module "azure_dns" {
-    source                  = "modules/azure_dns"
+    source                              = "modules/azure_dns"
     
-    resource_group_name     = "${module.resource_group.names["networking"]}"
-    dns_zone                = "${var.dns_zone}"
+    resource_group_name                 = "${module.resource_group.names["networking"]}"
+    dns_zone                            = "${var.dns_zone["external"]}"
 }
 
 module "aks_primary" {
@@ -32,7 +32,7 @@ module "aks_primary" {
     resource_group_names        = "${module.resource_group.names}"
     log_analytics_workspace_id  = "${module.monitoring_workspace.id}"
     aks_map                     = "${var.aks_map["primary"]}"
-    dns_zone                    = "${var.dns_zone}"             # to be replaced by output variable
+    dns_zone                    = "${var.dns_zone["internal"]}"           
     location                    = "${var.location_map["primary"]}"
     vnet                        = "${var.vnet["primary"]}"
     subnets                     = "${var.subnets["primary"]}"
@@ -48,10 +48,11 @@ module "aks_secondary" {
     resource_group_names        = "${module.resource_group.names}"
     log_analytics_workspace_id  = "${module.monitoring_workspace.id}"
     aks_map                     = "${var.aks_map["secondary"]}"
-    dns_zone                    = "${var.dns_zone}"             # to be replaced by output variable
+    dns_zone                    = "${var.dns_zone["internal"]}"           
     location                    = "${var.location_map["secondary"]}"
     vnet                        = "${var.vnet["secondary"]}"
     subnets                     = "${var.subnets["secondary"]}"
     waf_configuration_map       = "${var.waf_configuration_map["secondary"]}"
     aks_service_principal       = "${var.aks_service_principal["secondary"]}"
 }
+

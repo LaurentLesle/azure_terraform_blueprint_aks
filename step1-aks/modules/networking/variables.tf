@@ -19,3 +19,7 @@ variable "vnet" {
 variable "location" {
   
 }
+
+variable "dns_zone" {
+    type = "map"
+}

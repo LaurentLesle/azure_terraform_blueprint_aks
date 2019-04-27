@@ -19,6 +19,7 @@ provider "kubernetes" {
 }
 
 data "kubernetes_service" "nginx-ingress" {
+    
     depends_on = ["helm_release.nginx_ingress"]
     
     metadata {
