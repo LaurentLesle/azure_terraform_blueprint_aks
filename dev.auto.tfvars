@@ -65,6 +65,23 @@ waf_configuration_map {
     }
 }
 
+vnet {
+    region1 {
+        name                    = "vnet-aks-sg"
+        address_space           = "10.30.0.0/16"
+        aks-cluster1            = "10.30.0.0/25"
+        appgw-aks-cluster1      = "10.30.254.0/24"
+        bastion1                = "10.30.253.0/24"
+    }
+    region2 {
+        name                    = "vnet-aks-hk"
+        address_space           = "10.130.0.0/16"
+        aks-cluster1            = "10.130.0.0/25"
+        appgw-aks-cluster1      = "10.130.254.0/24"
+        bastion1                = "10.130.253.0/24"
+    }
+}
+
 aks_map {
     region1 {
         aks_name                    = "aks-cluster1-sg"
@@ -73,9 +90,11 @@ aks_map {
         aks_agent_count             = "1"
         aks_agent_vm_size           = "Standard_DS4_v2"
         aks_agent_os_disk_size      = "32"
-        aks_dns_service_ip          = "10.30.0.132"
-        aks_docker_bridge_cidr      = "172.17.0.1/16"
-        aks_service_cidr            = "10.30.0.128/25"
+        aks_dns_service_ip          = "172.17.0.10"      # IP from aks-cluster1 aks_service_cidr
+        aks_docker_bridge_cidr      = "172.16.0.1/16"
+        aks_service_cidr            = "172.17.0.0/16"
+        aks_pod_cidr                = "172.18.0.0/16"
+        aks_netPlugin               = "kubenet" 
     }
     region2 {
         aks_name                    = "aks-cluster1-hk"
@@ -84,9 +103,11 @@ aks_map {
         aks_agent_count             = "1"
         aks_agent_vm_size           = "Standard_DS4_v2"
         aks_agent_os_disk_size      = "32"
-        aks_dns_service_ip          = "10.31.0.132"
-        aks_docker_bridge_cidr      = "172.17.0.1/16"
-        aks_service_cidr            = "10.31.0.128/25"
+        aks_dns_service_ip          = "172.20.0.10"     # IP from aks-cluster1 aks_service_cidr
+        aks_docker_bridge_cidr      = "172.19.0.1/16"
+        aks_service_cidr            = "172.20.0.0/16"
+        aks_pod_cidr                = "172.21.0.0/16"
+        aks_netPlugin               = "kubenet" 
     }
 }
 
@@ -104,22 +125,7 @@ subnets {
     
 }
 
-vnet {
-    region1 {
-        name                    = "vnet-aks"
-        address_space           = "10.30.0.0/16"
-        aks-cluster1            = "10.30.0.0/25"
-        appgw-aks-cluster1      = "10.30.254.0/24"
-        bastion1                = "10.30.253.0/24"
-    }
-    region2 {
-        name                    = "vnet-aks-hk"
-        address_space           = "10.31.0.0/16"
-        aks-cluster1            = "10.31.0.0/25"
-        appgw-aks-cluster1      = "10.31.254.0/24"
-        bastion1                = "10.31.253.0/24"
-    }
-}
+
 
 dns_zone {
     external {
