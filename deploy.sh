@@ -27,7 +27,7 @@ function deploy_blueprint {
         prefix=$(terraform output prefix)
         tf_name="${prefix}.tfstate"
 
-        cd "../${path}"
+        cd "${current_path}"
         pwd 
 
         terraform init \
@@ -42,7 +42,6 @@ function deploy_blueprint {
         terraform ${tf_command} \
                 -var prefix=${prefix}
 
-        cd "${current_path}"
 }
 
 
