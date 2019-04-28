@@ -9,7 +9,7 @@ module "resource_group" {
 
 # Create the Azure Monitor workspace
 module "monitoring_workspace" {
-    source                  = "modules/log_analytics"
+    source                  = "log_analytics"
     
     prefix                  = "${var.prefix}"
     name                    = "${var.analytics_workspace_name}"
@@ -26,7 +26,7 @@ module "azure_dns" {
 }
 
 module "aks_region1" {
-    source                      = "modules/aks_2_regions"
+    source                      = "aks_with_dmz"
 
     prefix                      = "${var.prefix}"
     suffix                      = "sg"
@@ -43,7 +43,7 @@ module "aks_region1" {
 }
 
 module "aks_region2" {
-    source                      = "modules/aks_2_regions"
+    source                      = "aks_with_dmz"
 
     prefix                      = "${var.prefix}"
     suffix                      = "hk"
