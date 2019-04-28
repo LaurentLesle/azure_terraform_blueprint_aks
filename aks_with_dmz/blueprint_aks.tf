@@ -55,7 +55,7 @@ module "application_gateway" {
 
 # Managed Kubernetes Cluster
 module "aks_cluster" {
-    source                      = "git://github.com/LaurentLesle/azure_terraform_blueprint_modules_aks.git?ref=v1.0.0"
+    source                      = "git://github.com/LaurentLesle/azure_terraform_blueprint_modules_aks.git?ref=v1.1"
     
     prefix                      = "${var.prefix}"
     location                    = "${var.location}"
