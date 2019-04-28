@@ -1,6 +1,6 @@
 # Create the resource groups to host the blueprint
 module "resource_group" {
-    source                  = "modules/resource_group"
+    source                  = "git://github.com/LaurentLesle/azure_terraform_blueprint_modules_resource_group.git"
   
     prefix                  = "${var.prefix}"
     resource_groups         = "${var.resource_groups}"
@@ -19,7 +19,7 @@ module "monitoring_workspace" {
 
 # Register the Azure dns service to an existing domain name
 module "azure_dns" {
-    source                              = "modules/azure_dns"
+    source                              = "git://github.com/LaurentLesle/azure_terraform_blueprint_modules_azure_dns.git"
     
     resource_group_name                 = "${module.resource_group.names["networking"]}"
     dns_zone                            = "${var.dns_zone["external"]}"
