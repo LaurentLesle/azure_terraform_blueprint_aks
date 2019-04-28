@@ -4,7 +4,7 @@
 
 # Create service principal for the AKS cluster
 module "aks_service_principal" {
-    source                  = "../service_principal"
+    source                  = "git://github.com/LaurentLesle/azure_terraform_blueprint_modules_service_principal.git"
     
     prefix                  = "${var.prefix}"
     name                    = "${var.aks_service_principal["name"]}"
@@ -13,7 +13,7 @@ module "aks_service_principal" {
 
 # Create the user assigned identity
 module "user_msi" {
-    source                  = "../user_identity"
+    source                  = "git://github.com/LaurentLesle/azure_terraform_blueprint_modules_user_identity.git"
   
     prefix                  = "${var.prefix}"
     resource_group_name     = "${var.resource_group_names["identity"]}"
@@ -23,12 +23,12 @@ module "user_msi" {
 
 # Generate the ssh keys
 module "aks_ssh_keys" {
-    source                  = "../ssh_key"
+    source                  = "git://github.com/LaurentLesle/azure_terraform_blueprint_modules_ssh_keys.git?ref=v1.0.1"
 }
 
 # Create the network environment
 module "vnet_and_subnets" {
-    source                  = "../networking"
+    source                  = "git://github.com/LaurentLesle/azure_terraform_blueprint_modules_networking.git"
 
     location                = "${var.location}"
     resource_group_name     = "${var.resource_group_names["networking"]}"
@@ -55,7 +55,7 @@ module "application_gateway" {
 
 # Managed Kubernetes Cluster
 module "aks_cluster" {
-    source                      = "../aks"
+    source                      = "git://github.com/LaurentLesle/azure_terraform_blueprint_modules_aks.git?ref=v1.0.0"
     
     prefix                      = "${var.prefix}"
     location                    = "${var.location}"
