@@ -7,14 +7,21 @@ module "resource_group" {
     location                = "${var.location_map["region1"]}"
 }
 
+
 # Create the Azure Monitor workspace
 module "monitoring_workspace" {
-    source                  = "log_analytics"
+    source                  = "git://github.com/LaurentLesle/azure_terraform_blueprint_modules_log_analytics.git?ref=v1.3.1"
     
-    prefix                  = "${var.prefix}"
+    prefix                  = "${var.prefix}-"
     name                    = "${var.analytics_workspace_name}"
     resource_group_name     = "${module.resource_group.names["aks"]}"
     location                = "${var.location_map["region1"]}"
+    solution_plan_map       = {
+                ContainerInsights = [{
+                    publisher = "Microsoft"
+                    product   = "OMSGallery/ContainerInsights"
+                }]
+            }
 }
 
 # Register the Azure dns service to an existing domain name
