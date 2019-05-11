@@ -26,7 +26,7 @@ module "monitoring_workspace" {
 
 # Register the Azure dns service to an existing domain name
 module "azure_dns" {
-    source                              = "git://github.com/LaurentLesle/azure_terraform_blueprint_modules_azure_dns.git"
+    source                              = "git://github.com/LaurentLesle/azure_terraform_blueprint_modules_azure_dns.git?ref=v1.0"
     
     resource_group_name                 = "${module.resource_group.names["networking"]}"
     dns_zone                            = "${var.dns_zone["external"]}"
