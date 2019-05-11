@@ -1,6 +1,6 @@
 # Create the resource groups to host the blueprint
 module "resource_group" {
-    source                  = "git://github.com/LaurentLesle/azure_terraform_blueprint_modules_resource_group.git"
+    source                  = "git://github.com/LaurentLesle/azure_terraform_blueprint_modules_resource_group.git?ref=v1.1"
   
     prefix                  = "${var.prefix}"
     resource_groups         = "${var.resource_groups}"
