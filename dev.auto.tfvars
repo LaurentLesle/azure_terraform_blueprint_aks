@@ -29,6 +29,7 @@ resource_groups {
 waf_configuration_map {
     region1 {
         gateway_name                    = "app-gw01-sg"
+        subnet_name                     = "appgw-aks-cluster1"
         sku_name                        = "WAF_V2"
         sku_tier                        = "WAF_V2"
         capacity_sku                    = 1      
@@ -47,6 +48,7 @@ waf_configuration_map {
     }
     region2 {
         gateway_name                    = "app-gw01-hk"
+        subnet_name                     = "appgw-aks-cluster1"
         sku_name                        = "WAF_Medium"
         sku_tier                        = "WAF"
         capacity_sku                    = 1             
@@ -65,26 +67,11 @@ waf_configuration_map {
     }
 }
 
-vnet {
-    region1 {
-        name                    = "vnet-aks-sg"
-        address_space           = "10.30.0.0/16"
-        aks-cluster1            = "10.30.0.0/25"
-        appgw-aks-cluster1      = "10.30.254.0/24"
-        bastion1                = "10.30.253.0/24"
-    }
-    region2 {
-        name                    = "vnet-aks-hk"
-        address_space           = "10.130.0.0/16"
-        aks-cluster1            = "10.130.0.0/25"
-        appgw-aks-cluster1      = "10.130.254.0/24"
-        bastion1                = "10.130.253.0/24"
-    }
-}
 
 aks_map {
     region1 {
         aks_name                    = "aks-cluster1-sg"
+        subnet_name                 = "aks-cluster1"
         aks_version                 = "1.12.7"
         vm_user_name                = "aks-king"
         aks_agent_count             = "1"
@@ -98,6 +85,7 @@ aks_map {
     }
     region2 {
         aks_name                    = "aks-cluster1-hk"
+        subnet_name                 = "aks-cluster1"
         aks_version                 = "1.12.7"
         vm_user_name                = "aks-king"
         aks_agent_count             = "1"
@@ -111,16 +99,28 @@ aks_map {
     }
 }
 
-subnets {
+
+vnet {
     region1 {
-        "0_kubernetes"              = "aks-cluster1"
-        "1_applicationGateway"      = "appgw-aks-cluster1"
-        "2_bastion"                 = "bastion1"
+        name                    = "vnet-aks-sg"
+        address_space           = "10.30.0.0/16"
     }
     region2 {
-        "0_kubernetes"              = "aks-cluster1"
-        "1_applicationGateway"      = "appgw-aks-cluster1"
-        "2_bastion"                 = "bastion1"
+        name                    = "vnet-aks-hk"
+        address_space           = "10.130.0.0/16"
+    }
+}
+
+subnets {
+    region1 {
+        aks-cluster1            = "10.30.253.0/25"
+        appgw-aks-cluster1      = "10.30.253.128/25"
+        bastion1                = "10.30.254.0/24"
+    }
+    region2 {
+        aks-cluster1            = "10.130.253.0/25"
+        appgw-aks-cluster1      = "10.130.253.128/25"
+        bastion1                = "10.130.254.0/24"
     }
     
 }
