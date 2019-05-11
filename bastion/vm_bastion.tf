@@ -36,7 +36,7 @@ resource "azurerm_network_interface" "bastion" {
 
   ip_configuration {
     name      = "${var.computer_name}-ipconfig"
-    subnet_id = "${var.subnets_map["${var.subnet_name}"]}"
+    subnet_id = "${var.subnet_id}"
 
     private_ip_address_allocation = "dynamic"
     public_ip_address_id          = "${azurerm_public_ip.bastion_pip.id}"

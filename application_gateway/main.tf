@@ -23,7 +23,7 @@ resource "azurerm_application_gateway" "gw" {
 
     gateway_ip_configuration {
         name      = "ip-configuration"
-        subnet_id = "${var.vnet_id}/subnets/${var.subnet_name}"
+        subnet_id = "${var.vnet_id}/subnets/${var.waf_configuration_map["subnet_name"]}"
     }
 
     waf_configuration {

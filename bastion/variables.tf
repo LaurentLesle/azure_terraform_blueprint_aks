@@ -10,13 +10,8 @@ variable "vm_size" {
   
 }
 
-variable "subnets_map" {
-    description = "Map of the subnet to deploy the bastion server" 
-    type = "map"
-}
-
-variable "subnet_name" {
-    description = "Name of the subnet to deploy the bastion server"
+variable "subnet_id" {
+    description = "ID of the subnet to deploy the bastion server" 
 }
 
 
