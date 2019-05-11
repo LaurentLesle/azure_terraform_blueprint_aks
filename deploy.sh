@@ -6,8 +6,7 @@
 
 # capture the current path
 current_path=$(pwd)
-path=$1
-tf_command=$2
+tf_command=$1
 
 
 function initialize_state {
@@ -46,20 +45,20 @@ function deploy_blueprint {
 
 
 # Initialise storage account to store remote terraform state
-if [[ -z "${path}" && -z "$2" ]]; then
+if [[ -z "${tf_command}" ]]; then
         initialize_state
 fi
 
-if [[ -n "${path}" && -n "${tf_command}" ]]; then
+if [[ -n "${tf_command}" ]]; then
         echo ''
-        echo "Deploying blueprint '${path}' with terraform command '${tf_command}'"
+        echo "Deploying blueprint with terraform command '${tf_command}'"
         echo ''
         deploy_blueprint
 else
         echo ''
         echo 'You have to run at least once ./deploy.sh with no parameters to setup the remote state.'
-        echo 'To deploy a bluepring you have to specify the sub-folder name and the terraform command [plan|apply|destroy]'
-        echo './deploy.sh step1-aks plan'
+        echo 'To deploy a bluepring you have to run the terraform command [plan|apply|destroy]'
+        echo './deploy.sh plan'
         echo ''
         echo 'Note: the script does the terraform init for you.'
 fi
