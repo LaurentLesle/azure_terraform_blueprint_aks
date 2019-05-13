@@ -13,7 +13,7 @@ module "aks_service_principal" {
 
 # Create the user assigned identity
 module "user_msi" {
-    source                  = "git://github.com/LaurentLesle/azure_terraform_blueprint_modules_user_identity.git?ref=v1.0"
+    source                  = "git://github.com/LaurentLesle/azure_terraform_blueprint_modules_user_identity.git?ref=v1.1"
   
     prefix                  = "${var.prefix}"
     resource_group_name     = "${var.resource_group_names["identity"]}"

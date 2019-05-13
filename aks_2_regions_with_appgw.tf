@@ -1,8 +1,13 @@
+locals {
+    prefix_with_hyphen = "${var.prefix}-"
+}
+
+
 # Create the resource groups to host the blueprint
 module "resource_group" {
     source                  = "git://github.com/LaurentLesle/azure_terraform_blueprint_modules_resource_group.git?ref=v1.1"
   
-    prefix                  = "${var.prefix}"
+    prefix                  = "${local.prefix_with_hyphen}"
     resource_groups         = "${var.resource_groups}"
     location                = "${var.location_map["region1"]}"
 }
@@ -12,7 +17,7 @@ module "resource_group" {
 module "monitoring_workspace" {
     source                  = "git://github.com/LaurentLesle/azure_terraform_blueprint_modules_log_analytics.git?ref=v1.3.1"
     
-    prefix                  = "${var.prefix}-"
+    prefix                  = "${local.prefix_with_hyphen}"
     name                    = "${var.analytics_workspace_name}"
     resource_group_name     = "${module.resource_group.names["aks"]}"
     location                = "${var.location_map["region1"]}"
@@ -35,7 +40,7 @@ module "azure_dns" {
 module "aks_region1" {
     source                      = "aks_with_dmz"
 
-    prefix                      = "${var.prefix}"
+    prefix                      = "${local.prefix_with_hyphen}"
     suffix                      = "sg"
     resource_group_names        = "${module.resource_group.names}"
     resource_group_ids          = "${module.resource_group.ids}"
@@ -52,7 +57,7 @@ module "aks_region1" {
 module "aks_region2" {
     source                      = "aks_with_dmz"
 
-    prefix                      = "${var.prefix}"
+    prefix                      = "${local.prefix_with_hyphen}"
     suffix                      = "hk"
     resource_group_names        = "${module.resource_group.names}"
     resource_group_ids          = "${module.resource_group.ids}"
