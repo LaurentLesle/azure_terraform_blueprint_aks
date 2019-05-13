@@ -1,13 +1,13 @@
 
 aks_service_principal {
     region1 {
-        user_msi    = "msi-clusterdev01pri"      # Max 24 char including prefix (prefix 4 + 1)
-        name        = "aks-clusterdev01pri"
+        user_msi    = "msi-clusterdev01sg"      # Max 24 char including prefix (prefix 4 + 1)
+        name        = "aks-clusterdev01sg"
         end_date    = "2020-01-01T01:02:03Z"    # To be refactored to Date + Duration
     }
     region2 {
-        user_msi    = "msi-clusterdev01sec"      # Max 24 char including prefix (prefix 4 + 1)
-        name        = "aks-clusterdev01sec"
+        user_msi    = "msi-clusterdev01hk"      # Max 24 char including prefix (prefix 4 + 1)
+        name        = "aks-clusterdev01hk"
         end_date    = "2020-01-01T01:02:03Z"    # To be refactored to Date + Duration
     }
 }
