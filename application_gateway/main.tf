@@ -69,7 +69,7 @@ resource "azurerm_application_gateway" "gw" {
         name                = "backend_address_pool_ingress_controller_probe"
         host                = "127.0.0.1"
         protocol            = "${var.waf_configuration_map["backend_protocol"]}"
-        path                = "/helthz"
+        path                = "/healthz"
         interval            = "5"
         timeout             = "5"
         unhealthy_threshold = "10"
